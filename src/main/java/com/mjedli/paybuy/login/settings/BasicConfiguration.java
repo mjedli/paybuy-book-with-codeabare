@@ -44,7 +44,7 @@ public class BasicConfiguration {
         return authConfiguration.getAuthenticationManager();
     }
 
-    /*@Bean
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
@@ -72,8 +72,7 @@ public class BasicConfiguration {
                 .cors().configurationSource(corsConfigurationSource());
         return http.build();
     }
-     */
-
+/*
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -84,7 +83,7 @@ public class BasicConfiguration {
 
         return http.build();
     }
-
+*/
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
