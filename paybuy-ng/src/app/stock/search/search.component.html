@@ -48,6 +48,19 @@
 	<button class="btn btn-lg btn-primary btn-block" type="submit" (click)=getSearchCustomers()>Rechercher</button>
 </form>
 
+<p>Scanner votre code à bare.</p>
+
+<form class="form-signin" method="post" action="">
+	<p>
+		<label for="username" class="sr-only">Code à bare</label> <input
+			type="text"  name="product.code" class="form-control"
+			placeholder="Scannez un code-barres" autofocus 
+			value="{{searchValueCode}}" [(ngModel)]="searchValueCode">
+	</p>
+	<br>
+	<p>Valeur scannée : {{ searchValueCode }}</p>
+</form>
+
 <br>
 <br>
 

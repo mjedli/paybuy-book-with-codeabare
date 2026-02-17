@@ -79,6 +79,13 @@ export class StockService {
   public getSearchProduct():Observable<Product[]> {
     return this.http.post<Product[]>(this.usersUrl+"/paybay/stock", this.searchValue, httpOptions);
   }
+
+  /*
+  * getAllComponent
+  */
+  public getSearchProductCode():Observable<Product[]> {
+    return this.http.post<Product[]>(this.usersUrl+"/paybay/stockcode", this.searchValue, httpOptions);
+  }
   
   /*
   * getAllComponent with 0 amount

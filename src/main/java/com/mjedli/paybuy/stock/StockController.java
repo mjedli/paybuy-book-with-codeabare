@@ -51,6 +51,14 @@ public class StockController {
 		return stockService.getSearchStock(value);
 	
 	}
+
+	@PostMapping(value = HREF_BASE + "/stockcode")
+	@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8080"})
+	private List<Product> getSearchStockCode(@RequestBody String value) {
+
+		return stockService.getSearchStockCode(value);
+
+	}
 	
 	@PostMapping(value = HREF_BASE + "/stock/notempty")
 	@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8080"})
