@@ -23,7 +23,8 @@ export class AddInvoiceComponent implements OnInit {
 	searchValue:string="";
 	errorMessage:string="";
 	
-	currentDate = new Date();;
+	currentDate = new Date().toISOString().split('T')[0];
+
 	
 	somme:number=0.00;
 	sommeTVA:number=0.00;
@@ -185,21 +186,25 @@ export class AddInvoiceComponent implements OnInit {
 	handleKey(event: KeyboardEvent) {
 		const now = Date.now();
 
-		// Si délai trop long, on suppose que c’est un humain, on reset
-		if (now - this.lastTime > 50) {
-		this.buffer = '';
+		// Reset si délai trop long
+		if (now - this.lastTime > 150) {
+			this.buffer = '';
 		}
 
-		if (event.key === 'Enter') {
-		this.searchValueCode = this.buffer;
-		this.buffer = '';
-		this.getSearchCustomersCode();
-		} else {
-		this.buffer += event.key;
+		// Détection du "Enter" (toutes variantes)
+		if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+			this.searchValueCode = this.buffer;
+			console.log('Code scanné :', this.searchValueCode);
+			this.buffer = '';
+			this.getSearchCustomersCode();
+		} else if (event.key.length === 1) {
+			// On n'ajoute que les caractères imprimables
+			this.buffer += event.key;
 		}
 
 		this.lastTime = now;
 	}
+
 
 	// end code a bare
 	

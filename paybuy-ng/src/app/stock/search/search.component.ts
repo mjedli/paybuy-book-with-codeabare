@@ -30,21 +30,29 @@ export class SearchProductComponent implements OnInit {
 	handleKey(event: KeyboardEvent) {
 		const now = Date.now();
 
-		// Si délai trop long, on suppose que c’est un humain, on reset
-		if (now - this.lastTime > 50) {
-		this.buffer = '';
+		// Reset si frappe humaine
+		if (now - this.lastTime > 120) {
+			this.buffer = '';
 		}
 
-		if (event.key === 'Enter') {
-		this.searchValueCode = this.buffer;
-		this.buffer = '';
-		this.getSearchCustomersCode();
-		} else {
-		this.buffer += event.key;
+		// Fin du scan
+		if (event.key === 'Enter' || event.code === 'NumpadEnter') {
+			event.preventDefault();
+			this.searchValueCode = this.buffer;
+			this.buffer = '';
+			this.getSearchCustomersCode();
+			return;
+		}
+
+		// Ajout uniquement des caractères imprimables
+		if (event.key.length === 1) {
+			this.buffer += event.key;
 		}
 
 		this.lastTime = now;
 	}
+
+
 
 	// end code a bare
 
@@ -64,8 +72,8 @@ export class SearchProductComponent implements OnInit {
  	}
 
 	getSearchCustomersCode() {
-		if(this.searchValue != "") {
-			 this.stockService.setSearchValue(this.searchValue);
+		if(this.searchValueCode != "") {
+			 this.stockService.setSearchValue(this.searchValueCode);
 		   	 this.stockService.getSearchProductCode().subscribe({
 		        next: data => {
 		            this.list = data;

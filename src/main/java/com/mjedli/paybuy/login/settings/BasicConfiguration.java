@@ -84,7 +84,6 @@ public class BasicConfiguration {
         return http.build();
     }
 */
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();

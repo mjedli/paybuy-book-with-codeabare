@@ -22,7 +22,7 @@ export class InvoiceComponent implements OnInit {
 	
 	searchValue:string="";
 	
-	currentDate = new Date();;
+	currentDate = new Date().toISOString().split('T')[0];
 	
 	somme:number=0.00;
 	sommeTVA:number=0.00;

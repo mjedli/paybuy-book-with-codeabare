@@ -41,18 +41,18 @@ public class InvoiceRepository {
 	Tools tools = new Tools();
 
 	public Invoice addInvoice(Invoice invoice) {
-		
+
 		ZoneId defaultZoneId = ZoneId.systemDefault();
-		
+
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'00:00:00.001'Z'");
 		LocalDate date = LocalDate.parse(invoice.getDate());
-		
+
 		Date startDateIns = Date.from(date.atStartOfDay(defaultZoneId).toInstant());
-		
+
 		String startDate = formatter.format(startDateIns);
-		
+
 		invoice.setDate(startDate);
-		
+
 		return mongoOperations.insert(invoice);
 	}
 

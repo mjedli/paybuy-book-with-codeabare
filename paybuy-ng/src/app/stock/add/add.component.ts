@@ -29,22 +29,25 @@ export class AddProductComponent implements OnInit {
 
 	@HostListener('document:keydown', ['$event'])
 	handleKey(event: KeyboardEvent) {
-		const now = Date.now();
+	const now = Date.now();
 
-		// Si délai trop long, on suppose que c’est un humain, on reset
-		if (now - this.lastTime > 50) {
+	// Si délai trop long, on suppose que c’est un humain → reset
+	if (now - this.lastTime > 50) {
 		this.buffer = '';
-		}
-
-		if (event.key === 'Enter') {
-		this.product.code = this.buffer;
-		this.buffer = '';
-		} else {
-		this.buffer += event.key;
-		}
-
-		this.lastTime = now;
 	}
+
+	// Empêcher Enter de soumettre le formulaire
+	if (event.key === 'Enter') {
+		event.preventDefault(); // ← empêche la validation du formulaire
+		this.product.codebare = this.buffer;
+		this.buffer = '';
+	} else {
+		this.buffer += event.key;
+	}
+
+	this.lastTime = now;
+	}
+
 
 	// end code a bare
 

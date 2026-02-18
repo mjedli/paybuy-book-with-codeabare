@@ -7,5 +7,5 @@ export class Product {
   sellPrice:string;
   tva:string;
   profit:string;
-  code:string;
+  codebare:string;
 }

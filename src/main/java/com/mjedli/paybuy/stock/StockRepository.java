@@ -58,15 +58,10 @@ public class StockRepository {
 	}
 
 	public List<Product> getSearchStockCode(String value) {
-
-		List<Product> result = new ArrayList<Product>();
-
 		Query searchQuery = new Query();
-		searchQuery.addCriteria(Criteria.where("code").is(value));
-		List r = mongoOperations.find(searchQuery, Product.class);
-		result = (List<Product>) Stream.concat(r.stream(), result.stream()).collect(Collectors.toList());
+		searchQuery.addCriteria(Criteria.where("codebare").is(value));
+		return mongoOperations.find(searchQuery, Product.class);
 
-		return result;
 	}
 
 	public Product getProductById(String id) {
